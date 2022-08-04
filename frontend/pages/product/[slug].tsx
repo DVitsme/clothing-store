@@ -1,9 +1,14 @@
 import { useQuery } from 'urql';
 import { useRouter } from 'next/router';
+import { AiFillMinusCircle, AiFillPlusCircle } from 'react-icons/ai';
+
 import { GET_PRODUCT_QUERY } from '../../lib/query';
+import { useStateContext } from '../../lib/context';
 
 export default function ProductDetails() {
   const { query } = useRouter();
+
+  const { quantity, increaseQuantity, decreaseQuantity } = useStateContext();
 
   // fetch data
   const [results] = useQuery({
@@ -17,7 +22,7 @@ export default function ProductDetails() {
   if (error) return <p>oh no...{error.message}</p>;
 
   const product = data.products.data[0].attributes;
-  console.log(product);
+
   return (
     <div className="bg-white">
       <div className="mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -54,18 +59,22 @@ export default function ProductDetails() {
 
             <p className="text-gray-500 mt-6">{product.description}</p>
 
-            <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2">
+            <div className="mt-5 w-full">
+              <div className="mb-5 flex text-base w-1/4 justify-between items-center">
+                <p className="text-base text-gray-700">Quantity</p>
+                <button>
+                  <AiFillMinusCircle onClick={decreaseQuantity} />
+                </button>
+                <p>{quantity}</p>
+                <button>
+                  <AiFillPlusCircle onClick={increaseQuantity} />
+                </button>
+              </div>
               <button
                 type="button"
                 className="w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
               >
-                Pay {product.price}
-              </button>
-              <button
-                type="button"
-                className="w-full bg-indigo-50 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-indigo-700 hover:bg-indigo-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
-              >
-                Preview
+                Buy: {quantity} for ${product.price * quantity}
               </button>
             </div>
 

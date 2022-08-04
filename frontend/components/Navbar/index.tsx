@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 const navigation = [
-  { name: 'Home', href: '/' },
+  { name: 'Dart Mart', href: '/' },
   { name: 'Products', href: '#' },
   { name: 'Contact', href: '#' }
 ];
@@ -12,10 +12,16 @@ export default function Navbar() {
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Top">
         <div className="w-full py-6 flex items-center justify-between border-b border-indigo-500 lg:border-none">
           <div className="flex items-center">
-            <div className="hidden ml-10 space-x-8 lg:block">
+            <div className="hidden space-x-8 lg:block">
               {navigation.map((link, index) => (
                 <Link href={link.href} key={link.name}>
-                  <a className="text-base font-medium text-gray-700 hover:text-indigo-700">
+                  <a
+                    className={`${
+                      index === 0
+                        ? 'font-bold text-xl'
+                        : 'font-medium text-base'
+                    } text-gray-700 hover:text-indigo-700`}
+                  >
                     {link.name}
                   </a>
                 </Link>
