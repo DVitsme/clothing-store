@@ -8,7 +8,14 @@ import { useStateContext } from '../../lib/context';
 export default function ProductDetails() {
   const { query } = useRouter();
 
-  const { quantity, increaseQuantity, decreaseQuantity } = useStateContext();
+  const {
+    quantity,
+    increaseQuantity,
+    decreaseQuantity,
+    cartItems,
+    showCart,
+    addProductToCart
+  } = useStateContext();
 
   // fetch data
   const [results] = useQuery({
@@ -73,8 +80,9 @@ export default function ProductDetails() {
               <button
                 type="button"
                 className="w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
+                onClick={() => addProductToCart(product, quantity)}
               >
-                Buy: {quantity} for ${product.price * quantity}
+                Add: {quantity} for ${product.price * quantity} To Cart
               </button>
             </div>
 
