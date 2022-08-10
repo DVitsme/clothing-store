@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Cart from '../Cart';
 
 const navigation = [
   { name: 'Dart Mart', href: '/' },
@@ -28,7 +29,7 @@ export default function Navbar() {
               ))}
             </div>
           </div>
-          <div className="ml-10 space-x-4">
+          <div className="ml-10 space-x-4 flex items-center">
             <a
               href="#"
               className="inline-block bg-indigo-500 py-2 px-4 border border-transparent rounded-md text-base font-medium text-white hover:bg-opacity-75"
@@ -41,6 +42,7 @@ export default function Navbar() {
             >
               Sign up
             </a>
+            <Cart />
           </div>
         </div>
         <div className="py-4 flex flex-wrap justify-center space-x-6 lg:hidden">
