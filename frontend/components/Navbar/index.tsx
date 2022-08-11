@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Cart from '../Cart';
+import CartDrawer from '../Cart/drawer';
 
 const navigation = [
   { name: 'Dart Mart', href: '/' },
@@ -44,13 +45,14 @@ export default function Navbar() {
             </a>
             <Cart />
           </div>
+          <CartDrawer />
         </div>
         <div className="py-4 flex flex-wrap justify-center space-x-6 lg:hidden">
           {navigation.map((link) => (
             <a
               key={link.name}
               href={link.href}
-              className="text-base font-medium text-white hover:text-indigo-50"
+              className="text-base font-medium text-gray-700 hover:text-indigo-700"
             >
               {link.name}
             </a>

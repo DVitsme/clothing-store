@@ -4,6 +4,7 @@ import { AiFillMinusCircle, AiFillPlusCircle } from 'react-icons/ai';
 
 import { GET_PRODUCT_QUERY } from '../../lib/query';
 import { useStateContext } from '../../lib/context';
+import Loading from '../../components/Loading';
 
 export default function ProductDetails() {
   const { query } = useRouter();
@@ -25,7 +26,12 @@ export default function ProductDetails() {
 
   const { data, fetching, error } = results;
 
-  if (fetching) return <p>Loading...</p>;
+  if (fetching)
+    return (
+      <div className="flex justify-center items-center">
+        <Loading />
+      </div>
+    );
   if (error) return <p>oh no...{error.message}</p>;
 
   const product = data.products.data[0].attributes;
